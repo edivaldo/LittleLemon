@@ -11,12 +11,14 @@ def index(request):
     return render(request, 'restaurant/index.html', {})
 
 class MenuItemView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = menuSerializer
     search_fields = ['category__title']
     ordering_fields = ['price', 'inventory']
 
 class SingleMenuView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = menuSerializer
 
